@@ -1,5 +1,6 @@
 package com.yupi.project.service;
 
+import com.yupi.project.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.yupi.project.model.entity.InterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface InterfaceInfoService extends IService<InterfaceInfo> {
 
+    /**
+     * 校验请求参数
+     *
+     * @param interfaceInfo 接口信息
+     * @param add 对数据库的操作
+     */
+    void validInterfaceInfo(InterfaceInfo interfaceInfo, boolean add);
 }
