@@ -19,7 +19,7 @@ export async function deletePostUsingPOST(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseboolean>('/api/post/delete', {
+  return request<API.BaseResponseBoolean>('/api/post/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export async function updatePostUsingPOST(
   body: API.PostUpdateRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseboolean>('/api/post/update', {
+  return request<API.BaseResponseBoolean>('/api/post/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

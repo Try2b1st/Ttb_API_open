@@ -19,7 +19,7 @@ export async function deleteUserUsingPOST(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseboolean>('/api/user/delete', {
+  return request<API.BaseResponseBoolean>('/api/user/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export async function userLoginUsingPOST(
 
 /** userLogout POST /api/user/logout */
 export async function userLogoutUsingPOST(options?: { [key: string]: any }) {
-  return request<API.BaseResponseboolean>('/api/user/logout', {
+  return request<API.BaseResponseBoolean>('/api/user/logout', {
     method: 'POST',
     ...(options || {}),
   });
@@ -125,7 +125,7 @@ export async function updateUserUsingPOST(
   body: API.UserUpdateRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseboolean>('/api/user/update', {
+  return request<API.BaseResponseBoolean>('/api/user/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

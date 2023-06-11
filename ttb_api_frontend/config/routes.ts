@@ -14,7 +14,7 @@ export default [
     icon: 'crown',
     access: 'canAdmin',
     routes: [
-      { path: '/admin/sub-page', name: '二级管理页', icon: 'smile', component: './Welcome' },
+      { path: '/admin/sub-page', name: '用户列表', icon: 'smile', component: './Welcome' },
       { component: './404' },
     ],
   },

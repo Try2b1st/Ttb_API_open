@@ -22,7 +22,7 @@ export async function deleteInterfaceInfoUsingPOST(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseboolean>('/api/interfaceInfo/delete', {
+  return request<API.BaseResponseBoolean>('/api/interfaceInfo/delete', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export async function updateInterfaceInfoUsingPOST(
   body: API.InterfaceInfoUpdateRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseboolean>('/api/interfaceInfo/update', {
+  return request<API.BaseResponseBoolean>('/api/interfaceInfo/update', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
