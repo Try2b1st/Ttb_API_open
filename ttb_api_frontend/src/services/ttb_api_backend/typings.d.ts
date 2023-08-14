@@ -1,7 +1,7 @@
 declare namespace API {
   type BaseResponseBoolean = {
     code?: number;
-    data?: boolean;
+    data?: InterfaceInfo;
     message?: string;
   };
 

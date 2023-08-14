@@ -56,8 +56,6 @@ public class InterfaceInfoServiceImpl extends ServiceImpl<InterfaceInfoMapper, I
 
         if (StringUtils.isBlank(method)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "method:参数为空，或者过长");
-        } else if ("POST" != method || !"GET".equals(method)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "method参数错误");
         }
 
     }
