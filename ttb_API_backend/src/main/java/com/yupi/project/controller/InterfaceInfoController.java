@@ -2,11 +2,9 @@ package com.yupi.project.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.client.ApiClient;
 import com.yupi.project.annotation.AuthCheck;
-import com.yupi.project.common.BaseResponse;
-import com.yupi.project.common.DeleteRequest;
-import com.yupi.project.common.ErrorCode;
-import com.yupi.project.common.ResultUtils;
+import com.yupi.project.common.*;
 import com.yupi.project.constant.CommonConstant;
 import com.yupi.project.exception.BusinessException;
 import com.yupi.project.model.dto.interfaceinfo.InterfaceInfoAddRequest;
@@ -25,6 +23,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static com.yupi.project.model.enums.InterfaceStatusEnum.OFFLINE;
+import static com.yupi.project.model.enums.InterfaceStatusEnum.ONLINE;
+
 /**
  * 帖子接口
  *
@@ -40,6 +41,9 @@ public class InterfaceInfoController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private ApiClient apiClient;
 
     // region 增删改查
 
@@ -105,7 +109,7 @@ public class InterfaceInfoController {
      */
     @PostMapping("/update")
     public BaseResponse<Boolean> updateInterfaceInfo(@RequestBody InterfaceInfoUpdateRequest interfaceInfoUpdateRequest,
-                                            HttpServletRequest request) {
+                                                     HttpServletRequest request) {
         if (interfaceInfoUpdateRequest == null || interfaceInfoUpdateRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -196,4 +200,68 @@ public class InterfaceInfoController {
 
     // endregion
 
+    /**
+     * 发布接口
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/online")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                     HttpServletRequest request) {
+
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //判断是否存在
+        long id = idRequest.getId();
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        //测试接口是否能调用
+        com.model.User user = new com.model.User();
+        user.setUsername("wgz");
+        String username = apiClient.getNameByPost(user);
+        if (StringUtils.isBlank(username)) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "接口验证失败");
+        }
+
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(ONLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
+
+    /**
+     * 下线接口
+     *
+     * @param idRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/offline")
+    @AuthCheck(mustRole = "admin")
+    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
+                                                      HttpServletRequest request) {
+        if (idRequest == null || idRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        //判断是否存在
+        long id = idRequest.getId();
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+
+        InterfaceInfo interfaceInfo = new InterfaceInfo();
+        interfaceInfo.setId(id);
+        interfaceInfo.setStatus(OFFLINE.getValue());
+        boolean result = interfaceInfoService.updateById(interfaceInfo);
+        return ResultUtils.success(result);
+    }
 }

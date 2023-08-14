@@ -1,4 +1,3 @@
-import { removeRule } from '@/services/ant-design-pro/api';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
 import {
@@ -11,11 +10,15 @@ import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 import { SortOrder } from 'antd/lib/table/interface';
 import {
-  addInterfaceInfoUsingPOST, deleteInterfaceInfoUsingPOST,
-  listInterfaceInfoByPageUsingGET, updateInterfaceInfoUsingPOST,
+  addInterfaceInfoUsingPOST,
+  deleteInterfaceInfoUsingPOST,
+  listInterfaceInfoByPageUsingGET,
+  offlineInterfaceInfoUsingPOST,
+  onlineInterfaceInfoUsingPOST,
+  updateInterfaceInfoUsingPOST,
 } from '@/services/ttb_api_backend/interfaceInfoController';
-import CreateModal from '@/pages/InterfaceInfo/components/CreateModal';
-import UpdateModal from "@/pages/InterfaceInfo/components/UpdateModal";
+import CreateModal from '@/pages/Admin/InterfaceInfo/components/CreateModal';
+import UpdateModal from "@/pages/Admin/InterfaceInfo/components/UpdateModal";
 
 const TableList: React.FC = () => {
   /**
@@ -128,6 +131,68 @@ const TableList: React.FC = () => {
   };
 
   /**
+   *  Online node
+   * @zh-CN 发布接口
+   *
+   * @param record
+   */
+  const handleOnline = async (record: API.IdRequest) => {
+    const hide = message.loading('正在发布');
+    if (!record) return true;
+    try {
+      const response = await onlineInterfaceInfoUsingPOST({
+        id: record.id
+      });
+      hide();
+
+      // 拦截响应数据，进行个性化处理
+      const code = response.code;
+      if (code !== 0) {
+        throw new Error(response.message);
+      }
+
+      message.success('操作成功');
+      actionRef.current?.reload();
+      return true;
+    } catch (error: any) {
+      hide();
+      message.error('操作失败'+error.message);
+      return false;
+    }
+  };
+
+  /**
+   *  Online node
+   * @zh-CN 发布接口
+   *
+   * @param record
+   */
+  const handleOffline = async (record: API.IdRequest) => {
+    const hide = message.loading('正在下线');
+    if (!record) return true;
+    try {
+      const response = await offlineInterfaceInfoUsingPOST({
+        id: record.id
+      });
+      hide();
+
+      // 拦截响应数据，进行个性化处理
+      const code = response.code;
+      if (code !== 0) {
+        throw new Error(response.message);
+      }
+
+      message.success('操作成功');
+      actionRef.current?.reload();
+      return true;
+    } catch (error: any) {
+      hide();
+      message.error('操作失败'+error.message);
+      return false;
+    }
+  };
+
+  /**
    * @en-US International configuration
    * @zh-CN 国际化配置
    * */
@@ -185,18 +250,6 @@ const TableList: React.FC = () => {
       valueType: 'text',
     },
     {
-      title: '创建时间',
-      dataIndex: 'createTime',
-      valueType: 'dateTime',
-      hideInForm: true,
-    },
-    {
-      title: '最近更新时间',
-      dataIndex: 'updateTime',
-      valueType: 'dateTime',
-      hideInForm: true,
-    },
-    {
       title: '状态',
       dataIndex: 'status',
       hideInForm: true,
@@ -210,6 +263,18 @@ const TableList: React.FC = () => {
           status: 'Processing',
         },
       },
+    },
+    {
+      title: '创建时间',
+      dataIndex: 'createTime',
+      valueType: 'dateTime',
+      hideInForm: true,
+    },
+    {
+      title: '最近更新时间',
+      dataIndex: 'updateTime',
+      valueType: 'dateTime',
+      hideInForm: true,
     },
     {
       title: '操作',
@@ -226,14 +291,37 @@ const TableList: React.FC = () => {
           修改
         </a>,
 
-        <a
+        record.status === 0 ? <Button
+          type="text"
           key="config"
+          onClick={() => {
+            handleOnline(record);
+          }}
+        >
+          发布
+        </Button> : null,
+
+        record.status === 1 ? <Button
+          type="text"
+          key="config"
+          danger
+          onClick={() => {
+            handleOffline(record);
+          }}
+        >
+          下线
+        </Button> : null,
+
+        <Button
+          key="config"
+          type="text"
+          danger
           onClick={() => {
             handleRemove(record);
           }}
         >
           删除
-        </a>,
+        </Button>,
       ],
     },
   ];

@@ -1,7 +1,7 @@
 declare namespace API {
-  type BaseResponseBoolean = {
+  type BaseResponseboolean = {
     code?: number;
-    data?: InterfaceInfo;
+    data?: boolean;
     message?: string;
   };
 
@@ -87,6 +87,10 @@ declare namespace API {
 
   type getUserByIdUsingGETParams = {
     /** id */
+    id?: number;
+  };
+
+  type IdRequest = {
     id?: number;
   };
 
