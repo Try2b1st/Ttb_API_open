@@ -19,7 +19,8 @@ import java.util.Objects;
 public class NameController {
 
     @GetMapping("/")
-    public String getNameByGet(String name) {
+    public String getNameByGet(String name, HttpServletRequest request) {
+        System.out.println(request.getHeader("name"));
         return "GET 你的名字是" + name;
     }
 
