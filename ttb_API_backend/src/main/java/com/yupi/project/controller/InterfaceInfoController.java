@@ -59,7 +59,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/add")
-    public BaseResponse<Long> addInterfaceInfo(@RequestBody InterfaceInfoAddRequest interfaceInfoAddRequest, HttpServletRequest request) {
+    public BaseResponse<Long> addUserInterfaceInfo(@RequestBody InterfaceInfoAddRequest interfaceInfoAddRequest, HttpServletRequest request) {
         if (interfaceInfoAddRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -73,8 +73,8 @@ public class InterfaceInfoController {
         if (!result) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR);
         }
-        long newInterfaceInfoId = interfaceInfo.getId();
-        return ResultUtils.success(newInterfaceInfoId);
+        long newUserInterfaceInfoId = interfaceInfo.getId();
+        return ResultUtils.success(newUserInterfaceInfoId);
     }
 
     /**
@@ -85,19 +85,19 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/delete")
-    public BaseResponse<Boolean> deleteInterfaceInfo(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
+    public BaseResponse<Boolean> deleteUserInterfaceInfo(@RequestBody DeleteRequest deleteRequest, HttpServletRequest request) {
         if (deleteRequest == null || deleteRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         User user = userService.getLoginUser(request);
         long id = deleteRequest.getId();
         // 判断是否存在
-        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
-        if (oldInterfaceInfo == null) {
+        InterfaceInfo oldUserInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldUserInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         // 仅本人或管理员可删除
-        if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
+        if (!oldUserInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
         boolean b = interfaceInfoService.removeById(id);
@@ -112,7 +112,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/update")
-    public BaseResponse<Boolean> updateInterfaceInfo(@RequestBody InterfaceInfoUpdateRequest interfaceInfoUpdateRequest,
+    public BaseResponse<Boolean> updateUserInterfaceInfo(@RequestBody InterfaceInfoUpdateRequest interfaceInfoUpdateRequest,
                                                      HttpServletRequest request) {
         if (interfaceInfoUpdateRequest == null || interfaceInfoUpdateRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -124,12 +124,12 @@ public class InterfaceInfoController {
         User user = userService.getLoginUser(request);
         long id = interfaceInfoUpdateRequest.getId();
         // 判断是否存在
-        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
-        if (oldInterfaceInfo == null) {
+        InterfaceInfo oldUserInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldUserInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
         // 仅本人或管理员可修改
-        if (!oldInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
+        if (!oldUserInterfaceInfo.getUserId().equals(user.getId()) && !userService.isAdmin(request)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
         boolean result = interfaceInfoService.updateById(interfaceInfo);
@@ -143,7 +143,7 @@ public class InterfaceInfoController {
      * @return
      */
     @GetMapping("/get")
-    public BaseResponse<InterfaceInfo> getInterfaceInfoById(long id) {
+    public BaseResponse<InterfaceInfo> getUserInterfaceInfoById(long id) {
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -159,7 +159,7 @@ public class InterfaceInfoController {
      */
     @AuthCheck(mustRole = "admin")
     @GetMapping("/list")
-    public BaseResponse<List<InterfaceInfo>> listInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
+    public BaseResponse<List<InterfaceInfo>> listUserInterfaceInfo(InterfaceInfoQueryRequest interfaceInfoQueryRequest) {
         InterfaceInfo interfaceInfoQuery = new InterfaceInfo();
         if (interfaceInfoQueryRequest != null) {
             BeanUtils.copyProperties(interfaceInfoQueryRequest, interfaceInfoQuery);
@@ -177,7 +177,7 @@ public class InterfaceInfoController {
      * @return
      */
     @GetMapping("/list/page")
-    public BaseResponse<Page<InterfaceInfo>> listInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
+    public BaseResponse<Page<InterfaceInfo>> listUserInterfaceInfoByPage(InterfaceInfoQueryRequest interfaceInfoQueryRequest, HttpServletRequest request) {
         if (interfaceInfoQueryRequest == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
@@ -213,7 +213,7 @@ public class InterfaceInfoController {
      */
     @PostMapping("/online")
     @AuthCheck(mustRole = "admin")
-    public BaseResponse<Boolean> onlineInterfaceInfo(@RequestBody IdRequest idRequest,
+    public BaseResponse<Boolean> onlineUserInterfaceInfo(@RequestBody IdRequest idRequest,
                                                      HttpServletRequest request) {
 
         if (idRequest == null || idRequest.getId() <= 0) {
@@ -221,8 +221,8 @@ public class InterfaceInfoController {
         }
         //判断是否存在
         long id = idRequest.getId();
-        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
-        if (oldInterfaceInfo == null) {
+        InterfaceInfo oldUserInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldUserInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
@@ -250,15 +250,15 @@ public class InterfaceInfoController {
      */
     @PostMapping("/offline")
     @AuthCheck(mustRole = "admin")
-    public BaseResponse<Boolean> offlineInterfaceInfo(@RequestBody IdRequest idRequest,
+    public BaseResponse<Boolean> offlineUserInterfaceInfo(@RequestBody IdRequest idRequest,
                                                       HttpServletRequest request) {
         if (idRequest == null || idRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         //判断是否存在
         long id = idRequest.getId();
-        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
-        if (oldInterfaceInfo == null) {
+        InterfaceInfo oldUserInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldUserInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
@@ -277,7 +277,7 @@ public class InterfaceInfoController {
      * @return
      */
     @PostMapping("/invoke")
-    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
+    public BaseResponse<Object> invokeUserInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
                                                      HttpServletRequest request) {
         if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
@@ -286,11 +286,11 @@ public class InterfaceInfoController {
         long id = interfaceInfoInvokeRequest.getId();
         String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
 
-        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
-        if (oldInterfaceInfo == null) {
+        InterfaceInfo oldUserInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldUserInterfaceInfo == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        if(oldInterfaceInfo.getStatus() == OFFLINE.getValue()){
+        if(oldUserInterfaceInfo.getStatus() == OFFLINE.getValue()){
             throw new BusinessException(ErrorCode.PARAMS_ERROR,"接口已关闭");
         }
 
