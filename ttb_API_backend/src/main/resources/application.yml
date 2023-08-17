@@ -39,7 +39,7 @@ api:
 
 dubbo:
   application:
-    name: dubbo-springboot-demo-provide
+    name: dubbo-springboot-demo
   protocal:
     name: dubbo
     port: -1
