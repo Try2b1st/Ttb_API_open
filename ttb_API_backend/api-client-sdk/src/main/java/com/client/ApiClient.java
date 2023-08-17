@@ -17,6 +17,8 @@ import java.util.Map;
  * @author 下水道的小老鼠
  */
 public class ApiClient {
+
+    private static final String REQUEST_ADDRESS = "http://localhost:8090";
     private String accessKey;
     private String secretKey;
 
@@ -28,6 +30,7 @@ public class ApiClient {
 
     /**
      * 身份验证
+     *
      * @param body
      * @return
      */
@@ -49,7 +52,7 @@ public class ApiClient {
         hashMap.put("timestamp", String.valueOf(System.currentTimeMillis() / 1000));
 
         //6.签名
-        hashMap.put("sign", SignUtils.getSign(hashMap,secretKey));
+        hashMap.put("sign", SignUtils.getSign(hashMap, secretKey));
 
         return hashMap;
     }
@@ -58,7 +61,7 @@ public class ApiClient {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
 
-        String result = HttpUtil.get("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.get(REQUEST_ADDRESS + "/api/name", paramMap);
         System.out.println(result);
         return result;
     }
@@ -67,14 +70,14 @@ public class ApiClient {
         HashMap<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", name);
 
-        String result = HttpUtil.post("http://localhost:8123/api/name/", paramMap);
+        String result = HttpUtil.post(REQUEST_ADDRESS + "/api/name", paramMap);
         System.out.println(result);
         return result;
     }
 
     public String getNameByPost(User user) {
         String json = JSONUtil.toJsonStr(user);
-        HttpResponse execute = HttpRequest.post("http://localhost:8123/api/name/user")
+        HttpResponse execute = HttpRequest.post(REQUEST_ADDRESS + "/api/name/user")
                 .addHeaders(getHeaderMap(json))
                 .body(json)
                 .execute();

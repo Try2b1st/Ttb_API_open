@@ -15,14 +15,4 @@ public class ApiGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApiGatewayApplication.class, args);
     }
-
-    @Bean
-    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route("path_route", r -> r.path("/bilibili")
-                        .uri("https://www.bilibili.com"))
-                .route("host_route", r -> r.path("/baidu")
-                        .uri("https://www.baidu.com"))
-                .build();
-    }
 }

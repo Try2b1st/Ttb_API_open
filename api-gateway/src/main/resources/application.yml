@@ -4,6 +4,10 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: api_route
+          uri: http://localhost:8123
+          predicates:
+            - Path=/api/**
 #???????
 #        - id: after_route
 #          uri: https://www.baidu.com
@@ -17,13 +21,13 @@ spring:
 #          uri: https://www.baidu.com
 #          predicates:
 #            - Path=/baidu/**
-        - id: path_route
-          uri: http://localhost:8123
-          predicates:
-            - Path=/api/**
-          filters:
-            - AddRequestHeader=name, wgz
-            - AddRequestParameter=name, blue
+#        - id: path_route
+#          uri: http://localhost:8123
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - AddRequestHeader=name, wgz
+#            - AddRequestParameter=name, blue
 
 # ????
 #spring:
