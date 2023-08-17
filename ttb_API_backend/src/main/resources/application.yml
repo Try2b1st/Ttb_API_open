@@ -36,3 +36,13 @@ api:
   client:
     secret-key: qwerqwer
     access-key: yupi
+
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provide
+  protocal:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://localhost:8848

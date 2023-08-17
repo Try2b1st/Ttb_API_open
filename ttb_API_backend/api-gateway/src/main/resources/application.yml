@@ -1,0 +1,61 @@
+server:
+  port: 8090
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api_route
+          uri: http://localhost:8123
+          predicates:
+            - Path=/api/**
+#???????
+#        - id: after_route
+#          uri: https://www.baidu.com
+#          predicates:
+#            - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+#        - id: path_route
+#          uri: https://www.bilibili.com
+#          predicates:
+#            - Path=/bilibili/**
+#        - id: path_route
+#          uri: https://www.baidu.com
+#          predicates:
+#            - Path=/baidu/**
+#        - id: path_route
+#          uri: http://localhost:8123
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - AddRequestHeader=name, wgz
+#            - AddRequestParameter=name, blue
+
+# ????
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: weight_high
+#          uri: https://weighthigh.org
+#          predicates:
+#            - Weight=group1, 8
+#        - id: weight_low
+#          uri: https://weightlow.org
+#          predicates:
+#            - Weight=group1, 2
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: trace
+
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provide
+  protocal:
+    name: dubbo
+    port: -1
+  registry:
+    id: nacos-registry
+    address: nacos://localhost:8848
