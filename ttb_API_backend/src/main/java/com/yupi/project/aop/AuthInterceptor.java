@@ -1,5 +1,6 @@
 package com.yupi.project.aop;
 
+import com.apicommon.model.entity.User;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.yupi.project.annotation.AuthCheck;
 import com.yupi.project.common.ErrorCode;

@@ -1,4 +1,4 @@
-package com.yupi.project.service.impl;
+package com.yupi.project.service.impl.inner;
 
 import com.apicommon.model.entity.User;
 import com.apicommon.service.InnerUserService;
@@ -7,12 +7,14 @@ import com.yupi.project.common.ErrorCode;
 import com.yupi.project.exception.BusinessException;
 import com.yupi.project.mapper.UserMapper;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.DubboService;
 
 import javax.annotation.Resource;
 
 /**
  * @author 下水道的小老鼠
  */
+@DubboService
 public class InnerUserServiceImpl implements InnerUserService {
     @Resource
     private UserMapper userMapper;
