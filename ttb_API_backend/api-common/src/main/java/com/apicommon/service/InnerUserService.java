@@ -15,9 +15,7 @@ public interface InnerUserService {
     /**
      * 检查用户是否分配密钥
      *
-     * @param accessKey
-     * @param secretKey
      * @return
      */
-    User getInvokeUser(String accessKey, String secretKey);
+    User getInvokeUser(String accessKey);
 }
