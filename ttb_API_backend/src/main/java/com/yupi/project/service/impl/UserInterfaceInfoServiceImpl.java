@@ -1,14 +1,12 @@
 package com.yupi.project.service.impl;
 
-import com.apicommon.model.entity.InterfaceInfo;
-import com.apicommon.model.entity.User;
 import com.apicommon.model.entity.UserInterfaceInfo;
-import com.apicommon.service.UserInterfaceInfoService;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.project.common.ErrorCode;
 import com.yupi.project.exception.BusinessException;
 import com.yupi.project.mapper.UserInterfaceInfoMapper;
+import com.yupi.project.service.UserInterfaceInfoService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -37,15 +35,6 @@ public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoM
 
     }
 
-    @Override
-    public User getInvokeUser(String accessKey, String secretKey) {
-        return null;
-    }
-
-    @Override
-    public InterfaceInfo getInterfaceInfo(String path, String method) {
-        return null;
-    }
 
     @Override
     public boolean invokeCount(long userId, long interfaceInfoId) {

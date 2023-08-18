@@ -1,5 +1,7 @@
 package com.yupi.project.controller;
 
+import com.apicommon.model.entity.InterfaceInfo;
+import com.apicommon.model.entity.User;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.client.ApiClient;
@@ -12,9 +14,6 @@ import com.yupi.project.model.dto.interfaceinfo.InterfaceInfoAddRequest;
 import com.yupi.project.model.dto.interfaceinfo.InterfaceInfoInvokeRequest;
 import com.yupi.project.model.dto.interfaceinfo.InterfaceInfoQueryRequest;
 import com.yupi.project.model.dto.interfaceinfo.InterfaceInfoUpdateRequest;
-import com.yupi.project.model.entity.InterfaceInfo;
-import com.yupi.project.model.entity.User;
-import com.yupi.project.model.enums.InterfaceStatusEnum;
 import com.yupi.project.service.InterfaceInfoService;
 import com.yupi.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Objects;
 
 import static com.yupi.project.model.enums.InterfaceStatusEnum.OFFLINE;
 import static com.yupi.project.model.enums.InterfaceStatusEnum.ONLINE;
