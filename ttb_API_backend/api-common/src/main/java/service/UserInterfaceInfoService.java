@@ -1,8 +1,7 @@
-package com.yupi.project.service;
+package service;
 
-import com.yupi.project.model.entity.InterfaceInfo;
-import com.yupi.project.model.entity.UserInterfaceInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import model.entity.UserInterfaceInfo;
 
 /**
 * @author 下水道的小老鼠

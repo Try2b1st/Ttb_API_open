@@ -6,12 +6,14 @@ import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  * @author 下水道的小老鼠
  */
 @SpringBootApplication
 @EnableDubbo
+@Service
 public class ApiGatewayApplication {
 
     @DubboReference

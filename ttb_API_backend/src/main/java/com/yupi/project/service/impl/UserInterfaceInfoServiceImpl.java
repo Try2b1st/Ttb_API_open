@@ -20,22 +20,22 @@ import org.springframework.stereotype.Service;
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
         implements UserInterfaceInfoService {
 
-    @Override
-    public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
-        if (userInterfaceInfo == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-        }
-        if (add) {
-            if (userInterfaceInfo.getInterfaceInfoId() <= 0 || userInterfaceInfo.getUserId() <= 0) {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口或者用户不存在");
-            }
-
-            if (userInterfaceInfo.getLeftNum() < 0) {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "剩余次数不能小于零");
-            }
-        }
-
-    }
+//    @Override
+//    public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
+//        if (userInterfaceInfo == null) {
+//            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+//        }
+//        if (add) {
+//            if (userInterfaceInfo.getInterfaceInfoId() <= 0 || userInterfaceInfo.getUserId() <= 0) {
+//                throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口或者用户不存在");
+//            }
+//
+//            if (userInterfaceInfo.getLeftNum() < 0) {
+//                throw new BusinessException(ErrorCode.PARAMS_ERROR, "剩余次数不能小于零");
+//            }
+//        }
+//
+//    }
 
     @Override
     public boolean invokeCount(long userId, long interfaceInfoId) {

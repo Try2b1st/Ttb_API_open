@@ -16,6 +16,9 @@
  */
 package com.yupi.project.provide;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 /**
  * @author 下水道的小老鼠
  */
