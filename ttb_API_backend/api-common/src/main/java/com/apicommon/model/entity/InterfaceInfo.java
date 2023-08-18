@@ -1,4 +1,4 @@
-package model.entity;
+package com.apicommon.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

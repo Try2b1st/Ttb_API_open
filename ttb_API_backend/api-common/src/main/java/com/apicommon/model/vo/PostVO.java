@@ -1,8 +1,8 @@
-package model.vo;
+package com.apicommon.model.vo;
 
+import com.apicommon.model.entity.Post;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import model.entity.Post;
 
 /**
  * 帖子视图

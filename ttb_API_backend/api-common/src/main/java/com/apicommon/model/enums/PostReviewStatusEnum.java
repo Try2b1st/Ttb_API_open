@@ -1,4 +1,4 @@
-package model.enums;
+package com.apicommon.model.enums;
 
 import java.util.Arrays;
 import java.util.List;

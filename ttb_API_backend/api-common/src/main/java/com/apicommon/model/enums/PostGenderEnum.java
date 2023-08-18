@@ -1,4 +1,4 @@
-package model.enums;
+package com.apicommon.model.enums;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
  *
  * @author yupi
  */
-public enum InterfaceStatusEnum {
+public enum PostGenderEnum {
 
-    OFFLINE("下线", 0),
-    ONLINE("上线", 1);
+    MALE("男", 0),
+    FEMALE("女", 1);
 
     private final String text;
 
     private final int value;
 
-    InterfaceStatusEnum(String text, int value) {
+    PostGenderEnum(String text, int value) {
         this.text = text;
         this.value = value;
     }

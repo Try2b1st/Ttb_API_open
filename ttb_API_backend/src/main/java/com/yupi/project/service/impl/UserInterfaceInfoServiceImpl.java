@@ -1,14 +1,14 @@
 package com.yupi.project.service.impl;
 
+import com.apicommon.model.entity.InterfaceInfo;
+import com.apicommon.model.entity.User;
+import com.apicommon.model.entity.UserInterfaceInfo;
+import com.apicommon.service.UserInterfaceInfoService;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.project.common.ErrorCode;
 import com.yupi.project.exception.BusinessException;
-import com.yupi.project.model.entity.InterfaceInfo;
-import com.yupi.project.model.entity.UserInterfaceInfo;
-import com.yupi.project.service.UserInterfaceInfoService;
 import com.yupi.project.mapper.UserInterfaceInfoMapper;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,22 +20,32 @@ import org.springframework.stereotype.Service;
 public class UserInterfaceInfoServiceImpl extends ServiceImpl<UserInterfaceInfoMapper, UserInterfaceInfo>
         implements UserInterfaceInfoService {
 
-//    @Override
-//    public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
-//        if (userInterfaceInfo == null) {
-//            throw new BusinessException(ErrorCode.PARAMS_ERROR);
-//        }
-//        if (add) {
-//            if (userInterfaceInfo.getInterfaceInfoId() <= 0 || userInterfaceInfo.getUserId() <= 0) {
-//                throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口或者用户不存在");
-//            }
-//
-//            if (userInterfaceInfo.getLeftNum() < 0) {
-//                throw new BusinessException(ErrorCode.PARAMS_ERROR, "剩余次数不能小于零");
-//            }
-//        }
-//
-//    }
+    @Override
+    public void validUserInterfaceInfo(UserInterfaceInfo userInterfaceInfo, boolean add) {
+        if (userInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        if (add) {
+            if (userInterfaceInfo.getInterfaceInfoId() <= 0 || userInterfaceInfo.getUserId() <= 0) {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口或者用户不存在");
+            }
+
+            if (userInterfaceInfo.getLeftNum() < 0) {
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "剩余次数不能小于零");
+            }
+        }
+
+    }
+
+    @Override
+    public User getInvokeUser(String accessKey, String secretKey) {
+        return null;
+    }
+
+    @Override
+    public InterfaceInfo getInterfaceInfo(String path, String method) {
+        return null;
+    }
 
     @Override
     public boolean invokeCount(long userId, long interfaceInfoId) {
